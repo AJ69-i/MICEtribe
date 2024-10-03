@@ -1,0 +1,17 @@
+.p-3.rounded-3 {
+    & {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .form-check-input,
+    .form-check-label,
+    .dropdown,
+    input[type="radio"],
+    label {
+        cursor: pointer;
+    }
+}

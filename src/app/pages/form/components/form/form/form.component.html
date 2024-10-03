@@ -1,0 +1,51 @@
+<div class="container vh-100 d-flex align-items-center justify-content-center">
+    <div class="p-3 rounded-3">
+        <h1 class="text-center">Reactive Form with Undo/Redo</h1>
+        <form [formGroup]="form">
+            <div class="col-lg-5 col-md-6 col-sm-12 mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email">
+                <span *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-danger">
+                    Please enter a valid email address.
+                </span>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12 mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
+            </div>
+            <div class="mb-1 d-flex">
+                <div class="me-3">
+                    <input type="radio" id="male" value="Male" formControlName="gender" class="me-1">
+                    <label for="male">Male</label>
+                </div>
+                <div>
+                    <input type="radio" id="female" value="Female" formControlName="gender" class="me-1">
+                    <label for="female">Female</label>
+                </div>
+            </div>
+            <div class="dropdown mb-3">
+                <button class="btn btn-light dropdown-toggle" type="button" id="roleDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ form.get('role')?.value || 'Select Role' }} <!-- Display selected value -->
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="roleDropdown">
+                    <li><a class="dropdown-item" (click)="selectRole('admin')">Admin</a></li>
+                    <li><a class="dropdown-item" (click)="selectRole('user')">User</a></li>
+                </ul>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="agree">
+                <label class="form-check-label" for="exampleCheck1">Check</label>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary me-3" (click)="undo()"
+                    [disabled]="!canUndo()">Undo</button>
+                <button type="submit" class="btn btn-danger" (click)="redo()" [disabled]="!canRedo()">Redo</button>
+            </div>
+        </form>
+        <div class="feedback mt-3">
+            <p *ngIf="canUndo()">You can undo the last change.</p>
+            <p *ngIf="canRedo()">You can redo the last change.</p>
+        </div>
+    </div>
+</div>
